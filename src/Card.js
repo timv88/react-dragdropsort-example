@@ -67,21 +67,22 @@ var cardTarget = {
 
 class Card extends Component {
     render() {
-        var { text, isDragging, connectDragSource, connectDropTarget } = this.props;
-        var opacity = isDragging ? 0.5 : 1;
+        var { text, isDragging, connectDragSource, connectDropTarget, connectDragPreview } = this.props;
+        var opacity = isDragging ? 0 : 1;
 
-        return connectDropTarget(
+        return connectDropTarget(connectDragPreview(
             <div style={{ ...style, opacity }}>
                 {connectDragSource(<div style={handleStyle} />)}
                 {text}
             </div>
-        );
+        ));
     }
 }
 
 Card.PropTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
+    connectDragPreview: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
@@ -98,6 +99,7 @@ function connectTarget(connect) {
 function connectSource(connect, monitor) {
     return {
         connectDragSource: connect.dragSource(),
+        connectDragPreview: connect.dragPreview(),
         isDragging: monitor.isDragging()
     }
 }
