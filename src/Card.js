@@ -7,8 +7,14 @@ var style = {
     border: '1px dashed gray',
     padding: '0.5rem 1rem',
     marginBottom: '.5rem',
-    backgroundColor: 'white',
-    cursor: 'move'
+    backgroundColor: 'white'
+};
+
+var handleStyle = {
+    backgroundColor: 'hotpink',
+    cursor: 'move',
+    width: '100%',
+    height: '25px'
 };
 
 var cardSource = {
@@ -62,13 +68,14 @@ var cardTarget = {
 class Card extends Component {
     render() {
         var { text, isDragging, connectDragSource, connectDropTarget } = this.props;
-        var opacity = isDragging ? 0 : 1;
+        var opacity = isDragging ? 0.5 : 1;
 
-        return connectDragSource(connectDropTarget(
+        return connectDropTarget(
             <div style={{ ...style, opacity }}>
+                {connectDragSource(<div style={handleStyle} />)}
                 {text}
             </div>
-        ));
+        );
     }
 }
 
