@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import Container from './Container';
 
 export default class App extends Component {
   render() {
     return (
-      <h1>Hello, world.</h1>
+        <div>
+            <h1>Dragging, dropping &amp; sorting.</h1>
+            <Container />
+        </div>
     );
   }
 }
